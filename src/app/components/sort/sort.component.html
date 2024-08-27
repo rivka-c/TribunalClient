@@ -1,0 +1,9 @@
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>מיון לפי</mat-label>
+      <mat-select (selectionChange)="onSortChange($event.value)">
+        <mat-option value="fileOpeningDate">תאריך פתיחה</mat-option>
+        <mat-option value="caseNumber">מספר תיק</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>

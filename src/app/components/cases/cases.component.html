@@ -1,0 +1,9 @@
+<div>
+    <app-filter (filterChange)="filterCases($event)"></app-filter>
+</div>
+<div>
+    <app-sort (sortChange)="sortCases($event)"></app-sort>
+</div>
+@for (case of filteredCases; track $index) {
+<app-case [case]="case"></app-case>
+}

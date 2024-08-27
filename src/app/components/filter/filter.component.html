@@ -1,0 +1,11 @@
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>סינון לפי</mat-label>
+      <mat-select (selectionChange)="onFilterChange($event.value)">
+        <mat-option value="all">הכל</mat-option>
+        <mat-option value="myCases">תיקים שלי</mat-option>
+        <mat-option value="activeCases">תיקים פעילים</mat-option>
+        <mat-option value="closedCases">תיקים סגורים</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>

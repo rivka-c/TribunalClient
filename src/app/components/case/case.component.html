@@ -1,0 +1,21 @@
+<mat-card dir="rtl">
+    <mat-card-header>
+          <p><strong>מספר תיק:</strong> {{ case.caseNumber }}</p>
+      <p><strong>עורך דין:</strong> {{ case.practitioner }}</p>
+      <p><strong>סוג תיק:</strong> {{ case.caseType }}</p>
+
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+      <p><strong>תאריך פתיחת תיק:</strong> {{ case.fileOpeningDate | date }}</p>
+      <p><strong>תקופת זכאות:</strong> {{ case.eligibilityPeriod }}</p>
+      <p><strong>דיון סגירה:</strong> {{ case.CloseDiscussion | date }}</p>
+      </div>
+      <div class="row">
+      <p><strong>בא כוח משיב:</strong> {{ case.respondentProxy }}</p>
+      <p><strong>יושב ראש ועדה:</strong> {{ case.chairmanCommittee }}</p>
+      <p><strong>מגיש הערר:</strong> {{ case.appealSubmitter }}</p>
+    <p><strong>נציג ציבור:</strong> {{ case.publicRepresentative }}</p>
+    </div>
+    </mat-card-content>
+  </mat-card>
