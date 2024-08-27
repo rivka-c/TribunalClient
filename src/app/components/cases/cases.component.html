@@ -5,5 +5,5 @@
     <app-sort (sortChange)="sortCases($event)"></app-sort>
 </div>
 @for (case of filteredCases; track $index) {
-<app-case [case]="case"></app-case>
+<app-case [case]="case" ></app-case>
 }
