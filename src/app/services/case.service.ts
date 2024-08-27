@@ -1,162 +1,33 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Case } from '../models/case';
+import { catchError, EMPTY, map } from 'rxjs';
+import { environment } from '../../../environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CaseService {
   cases = signal<Case[]>([]);
+  private http = inject(HttpClient);
   constructor() { }
 
   getCases() {
-      this.cases.set([
-        {
-          caseId: 1,
-          caseNumber: '12345',
-          caseType: 'תביעה אזרחית',
-          caseTypeId: 1,
-          fileOpeningDate: new Date('2023-01-01'),
-          eligibilityPeriod: '2023-01-01 עד 2023-12-31',
-          CloseDiscussion: new Date('2023-12-31'),
-          respondentProxyId: 201,
-          respondentProxy: 'עו"ד רונית לוי',
-          chairmanCommitteeId: 301,
-          chairmanCommittee: 'מר חיים ישראלי',
-          publicRepresentativeId: 401,
-          publicRepresentative: 'גב\' מרים כהן',
-          appealSubmitterId: 501,
-          appealSubmitter: 'מר יוסי לוי',
-          practitionerId: 101,
-          practitioner: 'עו"ד יוסי כהן',
-          statusID: 1,
-          status: 'פתוח'
-        },
-        {
-          caseId: 2,
-          caseNumber: '67890',
-          caseType: 'תביעה פלילית',
-          caseTypeId: 2,
-          fileOpeningDate: new Date('2023-02-01'),
-          eligibilityPeriod: '2023-02-01 עד 2023-11-30',
-          CloseDiscussion: new Date('2023-11-30'),
-          respondentProxyId: 202,
-          respondentProxy: 'עו"ד דני כהן',
-          chairmanCommitteeId: 302,
-          chairmanCommittee: 'מר יעקב לוי',
-          publicRepresentativeId: 402,
-          publicRepresentative: 'גב\' רחל ישראלי',
-          appealSubmitterId: 502,
-          appealSubmitter: 'מר אבי כהן',
-          practitionerId: 102,
-          practitioner: 'עו"ד דני לוי',
-          statusID: 2,
-          status: 'סגור'
-        },
-        {
-          caseId: 3,
-          caseNumber: '11223',
-          caseType: 'תביעה מנהלית',
-          caseTypeId: 3,
-          fileOpeningDate: new Date('2023-03-01'),
-          eligibilityPeriod: '2023-03-01 עד 2023-10-31',
-          CloseDiscussion: new Date('2023-10-31'),
-          respondentProxyId: 203,
-          respondentProxy: 'עו"ד יעל ישראלי',
-          chairmanCommitteeId: 303,
-          chairmanCommittee: 'מר דני לוי',
-          publicRepresentativeId: 403,
-          publicRepresentative: 'גב\' שרה כהן',
-          appealSubmitterId: 503,
-          appealSubmitter: 'מר משה לוי',
-          practitionerId: 103,
-          practitioner: 'עו"ד יעל לוי',
-          statusID: 1,
-          status: 'פתוח'
-        },
-        {
-          caseId: 4,
-          caseNumber: '44556',
-          caseType: 'תביעה כספית',
-          caseTypeId: 4,
-          fileOpeningDate: new Date('2023-04-01'),
-          eligibilityPeriod: '2023-04-01 עד 2023-09-30',
-          CloseDiscussion: new Date('2023-09-30'),
-          respondentProxyId: 204,
-          respondentProxy: 'עו"ד מיכל לוי',
-          chairmanCommitteeId: 304,
-          chairmanCommittee: 'מר יוסי כהן',
-          publicRepresentativeId: 404,
-          publicRepresentative: 'גב\' מיכל ישראלי',
-          appealSubmitterId: 504,
-          appealSubmitter: 'מר דוד כהן',
-          practitionerId: 104,
-          practitioner: 'עו"ד מיכל כהן',
-          statusID: 2,
-          status: 'סגור'
-        },
-        {
-          caseId: 5,
-          caseNumber: '77889',
-          caseType: 'תביעה נזיקית',
-          caseTypeId: 5,
-          fileOpeningDate: new Date('2023-05-01'),
-          eligibilityPeriod: '2023-05-01 עד 2023-08-31',
-          CloseDiscussion: new Date('2023-08-31'),
-          respondentProxyId: 205,
-          respondentProxy: 'עו"ד רון לוי',
-          chairmanCommitteeId: 305,
-          chairmanCommittee: 'מר אבי ישראלי',
-          publicRepresentativeId: 405,
-          publicRepresentative: 'גב\' יעל כהן',
-          appealSubmitterId: 505,
-          appealSubmitter: 'מר חיים לוי',
-          practitionerId: 105,
-          practitioner: 'עו"ד רון כהן',
-          statusID: 1,
-          status: 'פתוח'
-        },
-        {
-          caseId: 6,
-          caseNumber: '99001',
-          caseType: 'תביעה חוזית',
-          caseTypeId: 6,
-          fileOpeningDate: new Date('2023-06-01'),
-          eligibilityPeriod: '2023-06-01 עד 2023-07-31',
-          CloseDiscussion: new Date('2023-07-31'),
-          respondentProxyId: 206,
-          respondentProxy: 'עו"ד דנה כהן',
-          chairmanCommitteeId: 306,
-          chairmanCommittee: 'מר יעקב ישראלי',
-          publicRepresentativeId: 406,
-          publicRepresentative: 'גב\' רונית לוי',
-          appealSubmitterId: 506,
-          appealSubmitter: 'מר יוסי ישראלי',
-          practitionerId: 106,
-          practitioner: 'עו"ד דנה לוי',
-          statusID: 2,
-          status: 'סגור'
-        },
-        {
-          caseId: 7,
-          caseNumber: '22334',
-          caseType: 'תביעה פלילית',
-          caseTypeId: 2,
-          fileOpeningDate: new Date('2023-07-01'),
-          eligibilityPeriod: '2023-07-01 עד 2023-12-31',
-          CloseDiscussion: new Date('2023-12-31'),
-          respondentProxyId: 207,
-          respondentProxy: 'עו"ד רונית כהן',
-          chairmanCommitteeId: 307,
-          chairmanCommittee: 'מר דני ישראלי',
-          publicRepresentativeId: 407,
-          publicRepresentative: 'גב\' מרים לוי',
-          appealSubmitterId: 507,
-          appealSubmitter: 'מר אבי ישראלי',
-          practitionerId: 107,
-          practitioner: 'עו"ד רונית לוי',
-          statusID: 1,
-          status: 'פתוח'
-        }
-      ]);
+    this.http
+    .get<any>(environment.apiUrl + `/Cases/GetCases`)
+    .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return EMPTY
+        }),
+        map(data => {
+          return data
+        })
+        
+      )
+      .subscribe((data: any) => {
+        this.cases.set(data);
+      });
+     
   }
 }
